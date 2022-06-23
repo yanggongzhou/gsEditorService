@@ -1,6 +1,6 @@
 // success: true => message, data
 // success: false => errorMessage, error
-export interface IResponse{
+export interface IResponse {
   success: boolean;
   message: string;
   errorMessage: string;
@@ -28,22 +28,17 @@ export class ResponseError implements IResponse {
 }
 
 export class ResponseSuccess implements IResponse {
-  constructor(infoMessage: string, data?: any, notLog?: boolean) {
+  constructor(infoMessage: string, data?: any) {
     this.success = true;
     this.message = infoMessage;
     this.data = data;
-    if (!notLog) {
-      try {
-        const offuscateRequest = JSON.parse(JSON.stringify(data));
-        if (offuscateRequest && offuscateRequest.token)
-          offuscateRequest.token = '*******';
-        console.log(
-          new Date().toString() +
-            ' - [Response]: ' +
-            JSON.stringify(offuscateRequest),
-        );
-      } catch (error) {}
-    }
+
+    const obfuscateRequest = JSON.parse(JSON.stringify(data));
+    console.log(
+      new Date().toString() +
+        ' - [Response]: ' +
+        JSON.stringify(obfuscateRequest),
+    );
   }
   message: string;
   data: any[];

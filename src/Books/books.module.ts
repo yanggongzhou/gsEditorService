@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { BooksController } from './books.controller';
 import { BooksService } from './books.service';
 import { BookSchema } from './schemas/book.schema';
+import { LoggerMiddleware } from '@/common/middlewares/logger.middleware';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'Book', schema: BookSchema }])],
@@ -12,7 +13,7 @@ import { BookSchema } from './schemas/book.schema';
 export class BooksModule implements NestModule {
   public configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply()
+      .apply(LoggerMiddleware)
       // .exclude(
       //   { path: 'example', method: RequestMethod.GET },
       // )
