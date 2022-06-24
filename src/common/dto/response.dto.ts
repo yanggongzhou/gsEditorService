@@ -1,14 +1,14 @@
 // success: true => message, data
 // success: false => errorMessage, error
-export interface IResponse {
+export interface IResponse<T> {
   success: boolean;
   message: string;
   errorMessage: string;
-  data: any[];
+  data: T;
   error: any;
 }
 
-export class ResponseError implements IResponse {
+export class ResponseError<T> implements IResponse<T> {
   constructor(infoMessage: string, data?: any) {
     this.success = false;
     this.message = infoMessage;
@@ -21,13 +21,13 @@ export class ResponseError implements IResponse {
     );
   }
   message: string;
-  data: any[];
+  data: T;
   errorMessage: any;
   error: any;
   success: boolean;
 }
 
-export class ResponseSuccess implements IResponse {
+export class ResponseSuccess<T> implements IResponse<T> {
   constructor(infoMessage: string, data?: any) {
     this.success = true;
     this.message = infoMessage;
@@ -41,7 +41,7 @@ export class ResponseSuccess implements IResponse {
     );
   }
   message: string;
-  data: any[];
+  data: T;
   errorMessage: any;
   error: any;
   success: boolean;

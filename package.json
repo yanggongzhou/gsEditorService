@@ -21,6 +21,8 @@
     "@nestjs/mongoose": "^9.1.0",
     "@nestjs/platform-express": "^8.1.1",
     "@types/mongoose": "^5.11.97",
+    "express-rate-limit": "^6.4.0",
+    "helmet": "^5.1.0",
     "mongoose": "^6.3.6",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
