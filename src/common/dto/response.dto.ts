@@ -1,6 +1,6 @@
 // success: true => message, data
 // success: false => errorMessage, error
-export interface IResponse<T> {
+interface IResponse<T> {
   success: boolean;
   message: string;
   errorMessage: string;
@@ -46,3 +46,12 @@ export class ResponseSuccess<T> implements IResponse<T> {
   error: any;
   success: boolean;
 }
+
+// // example
+// try {
+//   const data = await this.booksService.serviceBookList();
+//   const { list } = new BookDto(data);
+//   return new ResponseSuccess('COMMON.SUCCESS', list);
+// } catch (error) {
+//   return new ResponseError('COMMON.ERROR.GENERIC_ERROR', error);
+// }
