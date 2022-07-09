@@ -39,11 +39,11 @@ export class ModifyInterceptor<T> implements NestInterceptor<T, IResponse<T>> {
       }),
 
       map((result) => {
-        console.log(
-          `${new Date().toString()} - [Response result] - ${JSON.stringify(
-            result,
-          )}`,
-        );
+        // console.log(
+        //   `${new Date().toString()} - [Response result] - ${JSON.stringify(
+        //     result,
+        //   )}`,
+        // );
         return {
           data: result,
           code: HttpStatus.OK,
