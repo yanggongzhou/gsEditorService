@@ -45,7 +45,7 @@ export class ModifyInterceptor<T> implements NestInterceptor<T, IResponse<T>> {
           )}`,
         );
         return {
-          result,
+          data: result,
           code: HttpStatus.OK,
           message: (result as any).message || '响应成功',
         };

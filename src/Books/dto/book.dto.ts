@@ -1,8 +1,14 @@
 import { IBook } from '@/Books/interfaces/book.interface';
 
 export default class BookDto {
-  constructor(list: Array<IBook>) {
-    this.list = list;
+  constructor(object: IBook) {
+    this.bookName = object.bookName;
+    this.bookIntro = object.bookIntro || '';
+    this.bookCover = object.bookCover || '';
+    this.id = object._id;
   }
-  readonly list: Array<IBook>;
+  readonly id: string;
+  readonly bookName: string;
+  readonly bookIntro: string;
+  readonly bookCover: string;
 }
