@@ -24,7 +24,7 @@ export class ChapterService {
       const newChapter = new this.chapterModel(params);
       return await newChapter.save();
     } else {
-      throw new HttpException('书名称不合规', HttpStatus.FORBIDDEN);
+      throw new HttpException('章节名称不合规', HttpStatus.FORBIDDEN);
     }
   }
   /**

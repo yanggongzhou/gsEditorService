@@ -1,4 +1,4 @@
-export class UpdateBookDto {
+export default class UpdateBookDto {
   readonly id: string;
   readonly bookName: string;
   readonly bookIntro: string;

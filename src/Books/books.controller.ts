@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import BookDto from '@/Books/dto/book.dto';
-import { CreateBookDto } from '@/Books/dto/create-book.dto';
-import { UpdateBookDto } from '@/Books/dto/update-book.dto';
+import CreateBookDto from '@/Books/dto/create-book.dto';
+import UpdateBookDto from '@/Books/dto/update-book.dto';
 
 @Controller('/api/book')
 export class BooksController {
@@ -32,7 +32,7 @@ export class BooksController {
    */
   @Post('/save')
   async CreateBook(@Body() params: CreateBookDto) {
-    const item = await this.booksService.serviceCreateBook(params);;
+    const item = await this.booksService.serviceCreateBook(params);
     return new BookDto(item);
   }
 
