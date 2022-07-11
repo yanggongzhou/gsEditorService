@@ -2,8 +2,8 @@ import { Model } from 'mongoose';
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ICharacter } from '@/Character/interfaces/character.interface';
-import UpdateCharacterDto from '@/Character/dto/update-character.dto';
 import CreateCharacterDto from '@/Character/dto/create-character.dto';
+import UpdateCharacterDto from '@/Character/dto/update-character.dto';
 
 @Injectable()
 export class CharacterService {
@@ -14,7 +14,9 @@ export class CharacterService {
   /**
    * 获取角色列表
    */
-  async serviceCharacterList(params: { bookId: string }): Promise<ICharacter[]> {
+  async serviceCharacterList(params: {
+    bookId: string;
+  }): Promise<ICharacter[]> {
     return await this.characterModel.find(params).exec();
   }
   /**

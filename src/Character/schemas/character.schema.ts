@@ -5,4 +5,13 @@ export const CharacterSchema = new mongoose.Schema({
   characterName: String,
   characterIntro: String,
   bookId: String,
+  sex: Number,
+  mainCharacter: Number,
+  dressUp: {
+    skinId: String,
+    clothId: String,
+    emotionId: String,
+    hairId: String,
+    backextId: String,
+  },
 });

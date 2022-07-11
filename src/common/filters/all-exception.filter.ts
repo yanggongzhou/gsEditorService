@@ -30,10 +30,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     //     return response.status(status).send(message);
     //   }
     // }
-    console.log('exception.stack--------------------->');
-    console.error(exception.stack);
+    console.log('exception.message--------------------->');
+    console.error(exception.message);
     response.status(status).json({
       code: status,
+      message: exception.message,
       timestamp: new Date().toISOString(),
       path: request.url,
     });

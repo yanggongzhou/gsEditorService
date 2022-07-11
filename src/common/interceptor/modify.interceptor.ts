@@ -35,9 +35,8 @@ export class ModifyInterceptor<T> implements NestInterceptor<T, IResponse<T>> {
         if (err instanceof TimeoutError) {
           return throwError(() => new RequestTimeoutException());
         }
-        return throwError(() => new BadGatewayException());
+        return throwError(() => new BadGatewayException(err));
       }),
-
       map((result) => {
         // console.log(
         //   `${new Date().toString()} - [Response result] - ${JSON.stringify(
