@@ -1,7 +1,11 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { IMaterial } from '@/Material/interfaces/material.interface';
+import {
+  LookTypeEnum,
+  IMaterial,
+  MaterialTypeEnum,
+} from '@/Material/interfaces/material.interface';
 import CreateMaterialDto from '@/Material/dto/create-material.dto';
 import UpdateMaterialDto from '@/Material/dto/update-material.dto';
 
@@ -14,7 +18,10 @@ export class MaterialService {
   /**
    * 获取素材列表
    */
-  async serviceMaterialList(params: { typeOne: string }): Promise<IMaterial[]> {
+  async serviceMaterialList(params: {
+    materialType: MaterialTypeEnum;
+    lookType?: LookTypeEnum;
+  }): Promise<IMaterial[]> {
     return await this.materialModel.find(params).exec();
   }
   /**

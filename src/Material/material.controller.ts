@@ -12,6 +12,10 @@ import { ValidationPipe } from '@/pipe/validation.pipe';
 import MaterialDto from '@/Material/dto/material.dto';
 import CreateMaterialDto from '@/Material/dto/create-material.dto';
 import UpdateMaterialDto from '@/Material/dto/update-material.dto';
+import {
+  LookTypeEnum,
+  MaterialTypeEnum,
+} from '@/Material/interfaces/material.interface';
 
 @Controller('/api/material')
 export class MaterialController {
@@ -19,16 +23,18 @@ export class MaterialController {
 
   /**
    * 获取素材列表
-   * @param typeOne
-   * @param typeTwo
+   * @param materialType
+   * @param lookType
    */
   @Get('/list')
   async getMaterialList(
-    @Query('typeOne') typeOne: string,
-    @Query('typeTwo') typeTwo: string,
+    @Query('materialType') materialType: MaterialTypeEnum,
+    @Query('lookType') lookType?: LookTypeEnum,
   ) {
-    console.log('params----------_>', typeOne, typeTwo);
-    const data = await this.materialService.serviceMaterialList({ typeOne });
+    const data = await this.materialService.serviceMaterialList({
+      materialType,
+      lookType,
+    });
     return data.map((val) => new MaterialDto(val));
   }
 
