@@ -31,6 +31,7 @@ export class MaterialController {
     @Query('materialType') materialType: MaterialTypeEnum,
     @Query('lookType') lookType?: LookTypeEnum,
   ) {
+    console.log('lookType------>', lookType);
     const data = await this.materialService.serviceMaterialList({
       materialType,
       lookType,

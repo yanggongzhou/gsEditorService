@@ -8,6 +8,7 @@ import {
 } from '@/Material/interfaces/material.interface';
 import CreateMaterialDto from '@/Material/dto/create-material.dto';
 import UpdateMaterialDto from '@/Material/dto/update-material.dto';
+import { filterObject } from '@/utils/filterObject';
 
 @Injectable()
 export class MaterialService {
@@ -22,7 +23,8 @@ export class MaterialService {
     materialType: MaterialTypeEnum;
     lookType?: LookTypeEnum;
   }): Promise<IMaterial[]> {
-    return await this.materialModel.find(params).exec();
+    const findData = filterObject(params);
+    return await this.materialModel.find(findData).exec();
   }
   /**
    * 创建素材

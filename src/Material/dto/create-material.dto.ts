@@ -9,7 +9,6 @@ import {
  */
 
 export default class CreateMaterialDto {
-  @IsNotEmpty({ message: '素材名不能为空' })
   readonly materialName: string;
   @IsNotEmpty({ message: '请选择素材类型' })
   readonly materialType: MaterialTypeEnum;
