@@ -1,4 +1,4 @@
-import { IDressUp } from '@/Character/interfaces/character.interface';
+import { IDressUpItem } from '@/Character/interfaces/character.interface';
 import CreateCharacterDto from '@/Character/dto/create-character.dto';
 
 /**
@@ -7,5 +7,9 @@ import CreateCharacterDto from '@/Character/dto/create-character.dto';
 
 export default class UpdateCharacterDto extends CreateCharacterDto {
   readonly id: string;
-  readonly dressUp: IDressUp;
+}
+
+export class UpdateCharacterLookDto {
+  readonly id: string;
+  readonly dressUpItem: IDressUpItem;
 }

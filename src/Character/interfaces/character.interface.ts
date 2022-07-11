@@ -10,7 +10,7 @@ export interface ICharacter extends Document {
   bookId: string;
   sex: SexType;
   mainCharacter: EBoolean;
-  dressUp?: IDressUp;
+  dressUp?: IDressUpItem[];
 }
 
 interface ISkin {
@@ -18,7 +18,10 @@ interface ISkin {
   url: string;
 }
 
-export interface IDressUp {
+export interface IDressUpItem {
+  id: string;
+  name: string;
+  isDefault: EBoolean;
   skin?: ISkin;
   cloth?: ISkin;
   emotion?: ISkin;

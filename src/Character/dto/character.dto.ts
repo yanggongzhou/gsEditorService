@@ -1,4 +1,4 @@
-import { ICharacter, IDressUp, SexType } from '@/Character/interfaces/character.interface';
+import { ICharacter, IDressUpItem, SexType } from '@/Character/interfaces/character.interface';
 import { EBoolean } from '@/common/interfaces/common.interface';
 
 /**
@@ -21,5 +21,5 @@ export default class CharacterDto {
   readonly bookId: string;
   readonly sex: SexType;
   readonly mainCharacter: EBoolean;
-  readonly dressUp: IDressUp;
+  readonly dressUp: IDressUpItem[];
 }

@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { CharacterService } from './character.service';
 import CreateCharacterDto from '@/Character/dto/create-character.dto';
-import UpdateCharacterDto from '@/Character/dto/update-character.dto';
+import UpdateCharacterDto, { UpdateCharacterLookDto } from '@/Character/dto/update-character.dto';
 import CharacterDto from '@/Character/dto/character.dto';
 import { ValidationPipe } from '@/pipe/validation.pipe';
 
@@ -62,4 +62,38 @@ export class CharacterController {
     const item = await this.characterService.serviceDetailCharacter(id);
     return new CharacterDto(item);
   }
+
+  /**
+   * 新增角色形象
+   * @param params CreateCharacterDto
+   */
+  @Post('/look/save')
+  async AddCharacterLook(@Body() params: UpdateCharacterLookDto) {
+    const item = await this.characterService.serviceAddCharacterLook(params);
+    return new CharacterDto(item);
+  }
+  /**
+   * 删除角色形象
+   * @param id
+   * @param characterId
+   */
+  @Delete('/look/delete')
+  async DeleteCharacterLook(
+    @Query('id') id: string,
+    @Query('characterId') characterId: string,
+  ) {
+    const item = await this.characterService.serviceDeleteCharacterLook({
+      characterId,
+      id,
+    });
+    return new CharacterDto(item);
+  }
+  /**
+   * 编辑角色形象
+   */
+  @Post('/look/edit')
+  async EditCharacterLook(@Body() params: UpdateCharacterLookDto) {
+    return await this.characterService.serviceEditCharacterLook(params);
+  }
+
 }

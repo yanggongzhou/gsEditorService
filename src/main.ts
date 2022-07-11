@@ -6,6 +6,7 @@ import * as bodyParser from 'body-parser';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { ValidationPipe } from '@/pipe/validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -13,6 +14,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ModifyInterceptor());
   // 全局过滤
   app.useGlobalFilters(new AllExceptionsFilter());
+  // 全局管道
+  app.useGlobalPipes(new ValidationPipe());
 
   app.use(bodyParser.json({ limit: '5mb' }));
   app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
