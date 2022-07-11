@@ -5,12 +5,13 @@ import {
   Get,
   Param,
   Post,
-  Query,
+  Query, UsePipes,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import BookDto from '@/Books/dto/book.dto';
 import CreateBookDto from '@/Books/dto/create-book.dto';
 import UpdateBookDto from '@/Books/dto/update-book.dto';
+import { ValidationPipe } from '@/pipe/validation.pipe';
 
 @Controller('/api/book')
 export class BooksController {
@@ -30,6 +31,7 @@ export class BooksController {
    * 创建书籍
    * @param params CreateBookDto
    */
+  @UsePipes(new ValidationPipe()) // 使用管道验证
   @Post('/save')
   async CreateBook(@Body() params: CreateBookDto) {
     const item = await this.booksService.serviceCreateBook(params);

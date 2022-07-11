@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { BooksModule } from './Books/books.module';
 import { ChapterModule } from '@/Chapters/chapter.module';
 import { CharacterModule } from '@/Character/character.module';
+import { MaterialModule } from '@/Material/material.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CharacterModule } from '@/Character/character.module';
     BooksModule,
     ChapterModule,
     CharacterModule,
+    MaterialModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,9 +3,9 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
-  Query, UsePipes,
+  Query,
+  UsePipes,
 } from '@nestjs/common';
 import { CharacterService } from './character.service';
 import CreateCharacterDto from '@/Character/dto/create-character.dto';
@@ -19,11 +19,11 @@ export class CharacterController {
 
   /**
    * 获取角色列表
-   * @param params
+   * @param bookId
    */
   @Get('/list')
-  async getCharacterList(@Query() params: { bookId: string }) {
-    const data = await this.characterService.serviceCharacterList(params);
+  async getCharacterList(@Query('bookId') bookId: string) {
+    const data = await this.characterService.serviceCharacterList(bookId);
     return data.map((val) => new CharacterDto(val));
   }
 
@@ -37,13 +37,13 @@ export class CharacterController {
     const item = await this.characterService.serviceCreateCharacter(params);
     return new CharacterDto(item);
   }
-
   /**
    * 删除角色
+   * @param id
    */
   @Delete('/delete')
-  async DeleteCharacter(@Query() query: { id: string }) {
-    const item = await this.characterService.serviceDeleteCharacter(query.id);
+  async DeleteCharacter(@Query('id') id: string) {
+    const item = await this.characterService.serviceDeleteCharacter(id);
     return new CharacterDto(item);
   }
   /**
@@ -54,12 +54,12 @@ export class CharacterController {
     return await this.characterService.serviceEditCharacter(params);
   }
   /**
-   * 获取角色列表
-   * @param query
+   * 获取角色详情
+   * @param id
    */
   @Get('/detail')
-  async DetailCharacter(@Query() query: { id: string }) {
-    const item = await this.characterService.serviceDetailCharacter(query.id);
+  async DetailCharacter(@Query('id') id: string) {
+    const item = await this.characterService.serviceDetailCharacter(id);
     return new CharacterDto(item);
   }
 }
