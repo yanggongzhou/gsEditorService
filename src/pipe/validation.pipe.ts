@@ -21,7 +21,8 @@ export class ValidationPipe implements PipeTransform {
     if (errors.length > 0) {
       const msg = Object.values(errors[0].constraints)[0]; // 只需要取第一个错误信息并返回即可
       console.error(msg);
-      throw new BadRequestException(`Validation failed: ${msg}`);
+      // throw new BadRequestException(`Validation failed: ${msg}`);
+      throw new BadRequestException(msg);
     }
     return value;
   }
