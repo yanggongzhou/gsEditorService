@@ -1,5 +1,6 @@
 import { IDressUpItem } from '@/Character/interfaces/character.interface';
 import CreateCharacterDto from '@/Character/dto/create-character.dto';
+import mongoose from 'mongoose';
 
 /**
  * 输入 传给数据库的模型

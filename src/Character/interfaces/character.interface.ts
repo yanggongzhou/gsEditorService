@@ -1,5 +1,6 @@
 import { Document } from 'mongoose';
 import { EBoolean } from '@/common/interfaces/common.interface';
+import mongoose from 'mongoose';
 
 /**
  * 定义 mongoose Model 模型 character.service.ts
