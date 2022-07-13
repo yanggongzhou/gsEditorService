@@ -41,9 +41,7 @@ export class ChapterService {
    * 编辑章节
    */
   async serviceEditChapter(params: UpdateChapterDto) {
-    const item = await this.chapterModel.findById(params.id);
-    item.overwrite({ ...params });
-    return await item.save();
+    return this.chapterModel.findByIdAndUpdate(params.id, { ...params });
   }
   /**
    * 章节详情
