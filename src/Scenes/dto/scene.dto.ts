@@ -7,7 +7,7 @@ import {
 
 export default class SceneDto {
   constructor(obj: ISceneItem) {
-    this.id = obj.id || '';
+    this.id = obj._id || '';
     this.bookId = obj.bookId;
     this.chapterId = obj.chapterId;
     this.nodeId = obj.nodeId;

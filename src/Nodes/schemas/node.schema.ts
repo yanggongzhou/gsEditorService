@@ -8,4 +8,5 @@ export const NodeSchema = new mongoose.Schema({
   chapterId: String,
   sceneContent: String, // 场景标题｜内容
   sceneNum: String, // 场景编号
+  sceneList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SceneSchema' }],
 });

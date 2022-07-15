@@ -27,6 +27,15 @@ export class NodeController {
     @Query('chapterId') chapterId: string,
   ) {
     const data = await this.nodeService.serviceNodeList(bookId, chapterId);
+    if (!Array.isArray(data) || data.length === 0) {
+      const params = new CreateNodeDto({
+        bookId,
+        chapterId,
+        sceneContent: 'new Scene',
+        sceneNum: '1',
+      });
+      await this.nodeService.serviceCreateNode(params);
+    }
     return data.map((val) => new NodeDto(val));
   }
 
