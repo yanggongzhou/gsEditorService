@@ -41,11 +41,22 @@ export class NodeController {
 
   /**
    * 创建节点
-   * @param params CreateNodeDto
+   * @param bookId
+   * @param chapterId
+   * @param sceneContent
+   * @param sceneNum
    */
   @Post('/save')
-  async CreateNode(@Body() params: CreateNodeDto) {
-    const item = await this.nodeService.serviceCreateNode(params);
+  async CreateNode(
+    @Body('bookId') bookId: string,
+    @Body('chapterId') chapterId: string,
+    @Body('sceneContent') sceneContent?: string,
+    @Body('sceneNum') sceneNum?: string,
+  ) {
+    const item = await this.nodeService.serviceCreateNode(
+      new CreateNodeDto({ bookId, chapterId, sceneContent, sceneNum }
+      ),
+    );
     return new NodeDto(item);
   }
 

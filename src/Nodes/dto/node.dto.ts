@@ -7,7 +7,7 @@ export default class NodeDto {
     this.bookId = obj.bookId;
     this.chapterId = obj.chapterId;
     this.sceneNum = obj.sceneNum || '';
-    this.sceneContent = obj?.sceneContent || '';
+    this.sceneContent = obj?.sceneContent || 'new Scene';
     this.sceneList =
       obj?.sceneList.map((val) => new SceneDto(val)) || ([] as SceneDto[]);
   }

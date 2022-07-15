@@ -4,7 +4,7 @@ export default class CreateNodeDto {
   constructor(props: CreateNodeDto) {
     this.bookId = props.bookId;
     this.chapterId = props.chapterId;
-    this.sceneContent = props.sceneContent;
+    this.sceneContent = props.sceneContent || 'new Scene';
     this.sceneNum = props.sceneNum;
   }
   @IsNotEmpty({ message: '书籍Id不能为空' })
