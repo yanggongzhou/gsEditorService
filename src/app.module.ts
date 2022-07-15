@@ -7,6 +7,7 @@ import { ChapterModule } from '@/Chapters/chapter.module';
 import { CharacterModule } from '@/Character/character.module';
 import { MaterialModule } from '@/Material/material.module';
 import { NodeModule } from '@/Nodes/node.module';
+import { SceneModule } from '@/Scenes/scene.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { NodeModule } from '@/Nodes/node.module';
     CharacterModule,
     MaterialModule,
     NodeModule,
+    SceneModule,
   ],
   controllers: [AppController],
   providers: [AppService],
