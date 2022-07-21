@@ -7,7 +7,7 @@ import {
 
 export default class SceneDto {
   constructor(obj: ISceneItem) {
-    this.id = obj._id || '';
+    this.id = obj.id;
     this.bookId = obj.bookId;
     this.chapterId = obj.chapterId;
     this.nodeId = obj.nodeId;
@@ -28,7 +28,7 @@ export default class SceneDto {
     this.cameraPos = obj.cameraPos || PositionEnum.中间;
     this.posId = obj.posId || PositionEnum.中间;
   }
-  readonly id: string;
+  readonly id?: string;
   readonly bookId: string;
   readonly chapterId: string;
   readonly nodeId: string;

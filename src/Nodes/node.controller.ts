@@ -11,10 +11,14 @@ import { NodeService } from './node.service';
 import CreateNodeDto from '@/Nodes/dto/create-node.dto';
 import UpdateNodeDto from '@/Nodes/dto/update-node.dto';
 import NodeDto from '@/Nodes/dto/node.dto';
+import CreateSceneDto from '@/Scenes/dto/create-scene.dto';
+import SceneDto from '@/Scenes/dto/scene.dto';
+import { SceneController } from '@/Scenes/scene.controller';
 
 @Controller('/api/node')
 export class NodeController {
-  constructor(private readonly nodeService: NodeService) {}
+  constructor(private readonly nodeService: NodeService) {
+  }
 
   /**
    * 获取节点列表
@@ -36,6 +40,7 @@ export class NodeController {
       });
       await this.nodeService.serviceCreateNode(params);
     }
+
     return data.map((val) => new NodeDto(val));
   }
 
@@ -54,7 +59,7 @@ export class NodeController {
     @Body('sceneNum') sceneNum?: string,
   ) {
     const item = await this.nodeService.serviceCreateNode(
-      new CreateNodeDto({ bookId, chapterId, sceneContent, sceneNum }
+      new CreateNodeDto({ bookId, chapterId, sceneContent, sceneNum },
       ),
     );
     return new NodeDto(item);
@@ -68,6 +73,7 @@ export class NodeController {
     const item = await this.nodeService.serviceDeleteNode(query.id);
     return new NodeDto(item);
   }
+
   /**
    * 编辑节点
    */
@@ -75,4 +81,25 @@ export class NodeController {
   async EditNode(@Body() params: UpdateNodeDto) {
     return await this.nodeService.serviceEditNode(params);
   }
+
+  /**
+   * 创建节点子项
+   * @param params SceneDto
+   */
+  @Post('/scene/save')
+  async CreateScene(@Body() params: any) {
+    const item = await this.nodeService.serviceCreateScene(params);
+    return new NodeDto(item);
+  }
+
+  /**
+   * 删除节点子项
+   */
+  @Delete('/scene/delete')
+  async DeleteScene(@Query('id') id: string, @Query('nodeId') nodeId: string) {
+    const item = await this.nodeService.serviceDeleteScene({ id, nodeId });
+    return new NodeDto(item);
+  }
+
+
 }

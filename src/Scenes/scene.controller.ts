@@ -12,13 +12,19 @@ export class SceneController {
    * 获取节点子项列表
    * @param bookId
    * @param chapterId
+   * @param nodeId
    */
   @Get('/list')
   async getSceneList(
     @Query('bookId') bookId: string,
     @Query('chapterId') chapterId: string,
+    @Query('nodeId') nodeId: string,
   ) {
-    const data = await this.sceneService.serviceSceneList(bookId, chapterId);
+    const data = await this.sceneService.serviceSceneList(
+      bookId,
+      chapterId,
+      nodeId,
+    );
     return data.map((val) => new SceneDto(val));
   }
 

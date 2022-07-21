@@ -16,8 +16,9 @@ export class SceneService {
   async serviceSceneList(
     bookId: string,
     chapterId: string,
+    nodeId: string,
   ): Promise<ISceneItem[]> {
-    return await this.sceneModel.find({ bookId, chapterId }).exec();
+    return await this.sceneModel.find({ bookId, chapterId, nodeId }).exec();
   }
   /**
    * 创建节点子项
