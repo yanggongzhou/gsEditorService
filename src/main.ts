@@ -24,14 +24,14 @@ async function bootstrap() {
   // app.enable('trust proxy'); // Example: app.enable('x-powered-by')
   // Helmet是一系列帮助增强Node.JS之Express/Connect等Javascript Web应用安全的中间件。
   app.use(helmet());
-  // 每个IP 15 分钟限制一百条数据
-  app.use(
-    rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100, // limit each IP to 100 requests per windowMs
-      message: 'Too many requests from this IP, please try again later',
-    }),
-  );
+  // // 每个IP 15 分钟限制一百条数据
+  // app.use(
+  //   rateLimit({
+  //     windowMs: 15 * 60 * 1000, // 15 minutes
+  //     max: 100, // limit each IP to 100 requests per windowMs
+  //     message: 'Too many requests from this IP, please try again later',
+  //   }),
+  // );
   // const createAccountLimiter = rateLimit({
   //   windowMs: 60 * 60 * 1000, // 1 hour window
   //   max: 3, // start blocking after 3 requests

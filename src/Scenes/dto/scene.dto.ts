@@ -6,8 +6,8 @@ import {
 } from '@/Scenes/interfaces/scene.interface';
 
 export default class SceneDto {
-  constructor(obj: ISceneItem) {
-    this.id = obj.id;
+  constructor(obj: ISceneItem | SceneDto) {
+    this.id = obj?.id;
     this.bookId = obj.bookId;
     this.chapterId = obj.chapterId;
     this.nodeId = obj.nodeId;

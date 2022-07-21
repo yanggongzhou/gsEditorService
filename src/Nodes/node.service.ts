@@ -4,12 +4,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { INodeItem } from '@/Nodes/interfaces/node.interface';
 import CreateNodeDto from '@/Nodes/dto/create-node.dto';
 import UpdateNodeDto from '@/Nodes/dto/update-node.dto';
-import CreateSceneDto from '@/Scenes/dto/create-scene.dto';
-import UpdateSceneDto from '@/Scenes/dto/update-scene.dto';
-import { ISceneItem } from '@/Scenes/interfaces/scene.interface';
+import { ISceneItem, TemplateTypeEnum } from '@/Scenes/interfaces/scene.interface';
 import { getGuid } from '@/utils/guid';
 import SceneDto from '@/Scenes/dto/scene.dto';
-import * as mongoose from 'mongoose';
+import CreateSceneDto from '@/Scenes/dto/create-scene.dto';
 
 @Injectable()
 export class NodeService {
@@ -79,7 +77,45 @@ export class NodeService {
       }
       return scene;
     });
-
     return nodeDb.save();
+  }
+
+  /**
+   * 删除节点子项Branch
+   */
+  async serviceDeleteBranch(params: { id: string; nodeId: string }) {
+    const item = await this.nodeModel.findById(params.nodeId);
+    const branchItem = item.sceneList.find((val) => val.id === params.id);
+    if (branchItem.type === TemplateTypeEnum.对话分支) {
+      item.sceneList = item.sceneList.filter(
+        (val) => branchItem.options.indexOf(val.id) === -1,
+      );
+    }
+    const index = item.sceneList.findIndex((val) => val.id === params.id);
+    if (index !== -1) {
+      item.sceneList.splice(index, 1);
+    }
+    return item.save();
+  }
+
+  /**
+   * 创建节点子项Branch
+   */
+  async serviceCreateBranch(params: CreateSceneDto) {
+    const item = await this.nodeModel.findById(params.nodeId);
+    const newSceneItem = (type: TemplateTypeEnum) => ({
+        ...params,
+        id: getGuid(),
+        type,
+      } as ISceneItem);
+    const branchData = newSceneItem(params.type);
+    if (params.type === TemplateTypeEnum.对话分支) {
+      const optionItem1 = newSceneItem(TemplateTypeEnum.选项);
+      const optionItem2 = newSceneItem(TemplateTypeEnum.选项);
+      item.sceneList = item.sceneList.concat([optionItem1, optionItem2]);
+      branchData.options = [optionItem1.id, optionItem2.id];
+    }
+    item.sceneList.push(branchData);
+    return item.save();
   }
 }

@@ -1,19 +1,11 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Post,
-  Put,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
 import { NodeService } from './node.service';
 import CreateNodeDto from '@/Nodes/dto/create-node.dto';
 import UpdateNodeDto from '@/Nodes/dto/update-node.dto';
 import NodeDto from '@/Nodes/dto/node.dto';
-import CreateSceneDto from '@/Scenes/dto/create-scene.dto';
+import { ISceneItem, TemplateTypeEnum } from '@/Scenes/interfaces/scene.interface';
 import SceneDto from '@/Scenes/dto/scene.dto';
-import { SceneController } from '@/Scenes/scene.controller';
+import CreateSceneDto from '@/Scenes/dto/create-scene.dto';
 
 @Controller('/api/node')
 export class NodeController {
@@ -87,11 +79,17 @@ export class NodeController {
    * @param params SceneDto
    */
   @Post('/scene/save')
-  async CreateScene(@Body() params: any) {
+  async CreateScene(@Body() params: SceneDto) {
     const item = await this.nodeService.serviceCreateScene(params);
     return new NodeDto(item);
   }
-
+  /**
+   * 编辑节点子项
+   */
+  @Put('/scene/edit')
+  async EditScene(@Body() params: ISceneItem) {
+    return await this.nodeService.serviceEditScene(params);
+  }
   /**
    * 删除节点子项
    */
@@ -101,5 +99,22 @@ export class NodeController {
     return new NodeDto(item);
   }
 
+  /**
+   * 创建节点子项Branch， 默认添加两个option
+   * @param params ISceneItem
+   */
+  @Post('/branch/save')
+  async CreateBranch(@Body() params: CreateSceneDto) {
+    const item = await this.nodeService.serviceCreateBranch(params);
+    return new NodeDto(item);
+  }
 
+  /**
+   * 删除节点子项
+   */
+  @Delete('/branch/delete')
+  async DeleteBranch(@Query('id') id: string, @Query('nodeId') nodeId: string) {
+    const item = await this.nodeService.serviceDeleteBranch({ id, nodeId });
+    return new NodeDto(item);
+  }
 }
