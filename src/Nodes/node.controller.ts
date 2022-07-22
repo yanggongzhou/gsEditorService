@@ -6,6 +6,7 @@ import NodeDto from '@/Nodes/dto/node.dto';
 import { ISceneItem, TemplateTypeEnum } from '@/Scenes/interfaces/scene.interface';
 import SceneDto from '@/Scenes/dto/scene.dto';
 import CreateSceneDto from '@/Scenes/dto/create-scene.dto';
+import UpdateSceneDto from '@/Scenes/dto/update-scene.dto';
 
 @Controller('/api/node')
 export class NodeController {
@@ -51,8 +52,7 @@ export class NodeController {
     @Body('sceneNum') sceneNum?: string,
   ) {
     const item = await this.nodeService.serviceCreateNode(
-      new CreateNodeDto({ bookId, chapterId, sceneContent, sceneNum },
-      ),
+      new CreateNodeDto({ bookId, chapterId, sceneContent, sceneNum }),
     );
     return new NodeDto(item);
   }
@@ -87,7 +87,7 @@ export class NodeController {
    * 编辑节点子项
    */
   @Put('/scene/edit')
-  async EditScene(@Body() params: ISceneItem) {
+  async EditScene(@Body() params: UpdateSceneDto) {
     return await this.nodeService.serviceEditScene(params);
   }
   /**
